@@ -23,18 +23,13 @@ jobs:
     - name: Run script
       run: python generate_readme.py
 
-    - name: Commit local changes
-      run: |
-        git add README.md
-        git commit -m "Auto-regenerate README before pull" || echo "No changes to commit"
-
     - name: Pull the latest changes
-      run: git pull --rebase origin main
+      run: git pull --rebase origin main || git rebase --abort
 
-    - name: Commit and push changes
+    - name: Commit and push changes (force push)
       run: |
         git add README.md
-        git commit -m "Auto-regenerate README after pull"
-        git push
+        git commit -m "Auto-regenerate README"
+        git push --force
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
