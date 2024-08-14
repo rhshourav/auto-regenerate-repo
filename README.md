@@ -1,5 +1,5 @@
 # Auto Regenerate Repository
 
-This README was last updated: 2024-08-14 09:51:15
+This README was last updated: 2024-08-14 11:06:17
 
- ![TryHackMe](https://tryhackme-badges.s3.amazonaws.com/deshoha.png)
+ ![TryHackMe](https://tryhackme.com/badge/533634)
