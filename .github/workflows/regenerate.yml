@@ -20,27 +20,16 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
-      run: |
-        pip install requests  # Install the requests library
-
     - name: Run script
       run: python generate_readme.py
 
-    - name: Configure Git
+    - name: Pull the latest changes
+      run: git pull origin main || true  # Ignore errors if there are no changes
+
+    - name: Commit and push changes
       run: |
         git config --global user.name "rhshourav"
         git config --global user.email "rhshourav02@gmail.com"
-
-    - name: Commit local changes
-      run: |
         git add README.md
-        git diff --quiet || git commit -m "Auto-regenerate README"
-
-    - name: Pull the latest changes
-      run: |
-        git pull origin main --rebase || true  # Pull changes and rebase
-
-    - name: Push changes
-      run: |
-        git push origin main
+        git diff --quiet && git diff --staged --quiet || git commit -m "Auto-regenerate README"
+        git push
