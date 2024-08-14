@@ -32,8 +32,10 @@ jobs:
         git config --global user.name "rhshourav"
         git config --global user.email "rhshourav02@gmail.com"
 
-    - name: Stash local changes
-      run: git stash || true  # Stash changes if there are any
+    - name: Commit local changes
+      run: |
+        git add README.md
+        git diff --quiet || git commit -m "Auto-regenerate README"
 
     - name: Pull the latest changes
       run: |
