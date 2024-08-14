@@ -27,11 +27,15 @@ jobs:
     - name: Run script
       run: python generate_readme.py
 
-    - name: Pull the latest changes
+    - name: Configure Git
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git pull origin main --rebase || true  # Pull changes and rebase
+
+    - name: Pull the latest changes
+      run: |
+        git fetch origin main
+        git reset --hard origin/main  # Reset local branch to match remote
 
     - name: Commit and push changes
       run: |
