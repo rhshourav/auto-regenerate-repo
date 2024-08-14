@@ -13,23 +13,32 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install requests  # Install the requests library
 
     - name: Run script
       run: python generate_readme.py
 
-    - name: Pull the latest changes
-      run: git pull origin main
-
-    - name: Commit and push changes
+    - name: Configure Git
       run: |
         git config --global user.name "rhshourav"
         git config --global user.email "rhshourav02@gmail.com"
-        git add README.md
-        git commit -m "Auto-regenerate README"
-        git push
+
+    - name: Stash local changes
+      run: git stash || true  # Stash changes if there are any
+
+    - name: Pull the latest changes
+      run: |
+        git pull origin main --rebase || true  # Pull changes and rebase
+
+    - name: Push changes
+      run: |
+        git push origin main
