@@ -1,11 +1,8 @@
-name: Auto Regenerate Repository
+name: Auto Regenerate README
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # Run every 10 minutes
-  push:
-    branches:
-      - main
+    - cron: "*/10 * * * *"  # Runs every 10 minutes
 
 jobs:
   regenerate-readme:
@@ -20,7 +17,7 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Run script to regenerate README
+    - name: Run script
       run: python generate_readme.py
 
     - name: Commit and push changes
