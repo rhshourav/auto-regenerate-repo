@@ -20,6 +20,10 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Install dependencies
+      run: |
+        pip install requests  # Install the requests library
+
     - name: Run script
       run: python generate_readme.py
 
