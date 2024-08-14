@@ -5,9 +5,6 @@ on:
     - cron: "*/10 * * * *"  # Runs every 10 minutes
 
 jobs:
-  permissions:
-    contents: read
-      pages: write   
   regenerate-readme:
     runs-on: ubuntu-latest
 
